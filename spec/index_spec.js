@@ -113,6 +113,17 @@ describe('apply', function() {
     p(10);
     expect(counter).toBe(11);
   });
+  it('should proxy function in a object', function() {
+    const obj = {
+      a: 1,
+      add(value) {
+        return value + this.a;
+      },
+    };
+    expect(obj.add(10)).toBe(11);
+    const p = proximize(obj);
+    expect(obj.add(20)).toBe(21);
+  });
 });
 
 describe('reporter', function() {
